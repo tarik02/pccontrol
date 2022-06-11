@@ -1,0 +1,12 @@
+{
+  "name": "@pccontrol/eslint-config",
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.24.0",
+    "@typescript-eslint/parser": "^5.24.0",
+    "eslint": "^8.15.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-editorconfig": "^3.2.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-react": "^7.30.0"
+  }
+}

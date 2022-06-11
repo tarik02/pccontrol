@@ -1,0 +1,22 @@
+{
+    "name": "tarik02/pccontrol-web",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Tarik02\\PccontrolWeb\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tarik02",
+            "email": "Taras.Fomin@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "symfony/http-foundation": "^6.1",
+        "symfony/dotenv": "^6.1",
+        "symfony/process": "^6.1"
+    }
+}

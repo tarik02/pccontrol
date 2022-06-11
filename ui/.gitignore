@@ -1,0 +1,20 @@
+# dependencies
+node_modules
+/.yarn/*
+!/.yarn/patches
+!/.yarn/plugins
+!/.yarn/releases
+!/.yarn/sdks
+!/.yarn/versions
+
+# environment
+.env
+.env.*
+!.env.example
+
+# output files
+dist
+
+# misc
+.DS_Store
+*.log
