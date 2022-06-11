@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import './index.scss';
 
-import app, { AppContext, Singletons, useApp } from '~/singletons';
+import app, { AppContext, useApp } from '~/singletons';
 
 import App from './App';
 

@@ -39,7 +39,7 @@ const initialState: State = {
 };
 
 export const slice = createSlice({
-  name: 'mode',
+  name: 'rgb',
   initialState,
   reducers: {
     setMode: (state, { payload }: PayloadAction<Mode>) => {
@@ -52,7 +52,6 @@ export const slice = createSlice({
     });
     builder.addCase(switchMode.fulfilled, (state, action) => {
       state.mode = action.payload;
-      console.log(action.payload);
     });
   },
 });
