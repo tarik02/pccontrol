@@ -21,7 +21,7 @@ export const createConnection = (handler: ConnectionHandler) => {
     handler.onConnectionAttempt?.();
 
     socket = new WebSocket(
-      `${ window.location.protocol === 'https' ? 'wss' : 'ws' }://${ window.location.host }/socket`
+      `${ window.location.protocol === 'https:' ? 'wss' : 'ws' }://${ window.location.host }/socket`
     );
 
     socket.onopen = () => {
