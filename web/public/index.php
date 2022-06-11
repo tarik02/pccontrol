@@ -7,7 +7,7 @@ use Symfony\Component\Dotenv\Dotenv;
 use Tarik02\PccontrolWeb\Controller;
 
 $dotenv = new Dotenv();
-$dotenv->load(__DIR__ . '/.env');
+$dotenv->load(__DIR__ . '/../.env');
 
 $request = Request::createFromGlobals();
 
