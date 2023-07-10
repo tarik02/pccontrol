@@ -25,9 +25,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - context: app
+        - target: app
           image: pccontrol-app
-        - context: web
+        - target: web
           image: pccontrol-web
 
     steps:
@@ -73,7 +73,7 @@ jobs:
         uses: docker/build-push-action@v4.0.0
         with:
           file: Containerfile
-          context: ${{ matrix.context }}
+          target: ${{ matrix.target }}
           platforms: "linux/amd64,linux/arm64"
           # Skip pushing when PR from a fork
           push: ${{ !github.event.pull_request.head.repo.fork }}
