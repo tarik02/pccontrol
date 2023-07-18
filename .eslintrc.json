@@ -1,0 +1,54 @@
+{
+    "extends": [
+        "next",
+        "@tarik02/eslint-config-type-1",
+        "@tarik02/eslint-config-type-1-import",
+        "@tarik02/eslint-config-type-1-react"
+    ],
+    "env": {
+        "browser": true
+    },
+    "settings": {
+        "react": {
+            "version": "18"
+        },
+        "import/resolver": {
+            "typescript": {
+                "project": "./tsconfig.json"
+            }
+        }
+    },
+    "rules": {
+        "import/order": [
+            "error",
+            {
+                "alphabetize": {
+                    "order": "asc",
+                    "caseInsensitive": true
+                },
+                "newlines-between": "always",
+                "groups": [
+                    [
+                        "builtin",
+                        "external"
+                    ],
+                    "internal",
+                    "parent",
+                    [
+                        "sibling",
+                        "index"
+                    ]
+                ],
+                "pathGroups": [
+                    {
+                        "pattern": "@/**",
+                        "group": "internal"
+                    }
+                ],
+                "pathGroupsExcludedImportTypes": [
+                    "builtin"
+                ]
+            }
+        ]
+    }
+}

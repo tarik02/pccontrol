@@ -1,0 +1,90 @@
+diff --git a/dist/build/utils.js b/dist/build/utils.js
+index a1b4317c265b642b094d80018b59d3e5b1d85fb6..2149ef7b2a6c7273cf0b991a77839bd799695302 100644
+--- a/dist/build/utils.js
++++ b/dist/build/utils.js
+@@ -1399,6 +1399,15 @@ createServerHandler({
+     }
+   })
+ 
++  server.on('upgrade', async (req, socket, head) => {
++    try {
++      await nextHandler.ws(req, socket, head)
++    } catch (err) {
++      console.error(err);
++      socket.terminate();
++    }
++  })
++
+   if (isValidKeepAliveTimeout) {
+     server.keepAliveTimeout = keepAliveTimeout
+   }
+diff --git a/dist/esm/build/utils.js b/dist/esm/build/utils.js
+index 6adfdfb409fa839251547e2a2d1367f6397eb4e4..b1e9f66d2542bf6cfb72ffdab29569bae12bf9b0 100644
+--- a/dist/esm/build/utils.js
++++ b/dist/esm/build/utils.js
+@@ -1241,6 +1241,15 @@ createServerHandler({
+     }
+   })
+ 
++  server.on('upgrade', async (req, socket, head) => {
++    try {
++      await nextHandler.ws(req, socket, head)
++    } catch (err) {
++      console.error(err);
++      socket.terminate();
++    }
++  })
++
+   if (isValidKeepAliveTimeout) {
+     server.keepAliveTimeout = keepAliveTimeout
+   }
+diff --git a/dist/esm/server/lib/render-server-standalone.js b/dist/esm/server/lib/render-server-standalone.js
+index 51da1b9ee7660304160d6daf6d4c975fee8b71dd..29567b12e9de9b3854c977e08526a8037938b256 100644
+--- a/dist/esm/server/lib/render-server-standalone.js
++++ b/dist/esm/server/lib/render-server-standalone.js
+@@ -59,7 +59,7 @@ export const createServerHandler = async ({ port , hostname , dir , dev =false ,
+         return proxyServer;
+     };
+     // proxy to router worker
+-    return async (req, res)=>{
++    const handler = async (req, res)=>{
+         const urlParts = (req.url || "").split("?");
+         const urlNoQuery = urlParts[0];
+         // this normalizes repeated slashes in the path e.g. hello//world ->
+@@ -93,6 +93,11 @@ export const createServerHandler = async ({ port , hostname , dir , dev =false ,
+             console.error(err);
+         });
+     };
++    handler.ws = async (req, socket, head)=>{
++        const proxyServer = getProxyServer(req.url || "/");
++        proxyServer.ws(req, socket, head);
++    };
++    return handler;
+ };
+ 
+ //# sourceMappingURL=render-server-standalone.js.map
+diff --git a/dist/server/lib/render-server-standalone.js b/dist/server/lib/render-server-standalone.js
+index 640140d514305509137742333d07c13a4ee09465..5a31b8dd8851c5018590d2c07b1a3406a23af3ae 100644
+--- a/dist/server/lib/render-server-standalone.js
++++ b/dist/server/lib/render-server-standalone.js
+@@ -74,7 +74,7 @@ const createServerHandler = async ({ port , hostname , dir , dev =false , minima
+         return proxyServer;
+     };
+     // proxy to router worker
+-    return async (req, res)=>{
++    const handler = async (req, res)=>{
+         const urlParts = (req.url || "").split("?");
+         const urlNoQuery = urlParts[0];
+         // this normalizes repeated slashes in the path e.g. hello//world ->
+@@ -108,6 +108,11 @@ const createServerHandler = async ({ port , hostname , dir , dev =false , minima
+             console.error(err);
+         });
+     };
++    handler.ws = async (req, socket, head)=>{
++        const proxyServer = getProxyServer(req.url || "/");
++        proxyServer.ws(req, socket, head);
++    };
++    return handler;
+ };
+ 
+ //# sourceMappingURL=render-server-standalone.js.map

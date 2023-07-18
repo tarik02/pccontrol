@@ -1,0 +1,29 @@
+diff --git a/dist/index.js b/dist/index.js
+index 5f6fb7271d28b806eb4d47ec04f19a9a628df7f8..4501b2ed3005c552cecdae6d0737f6148b2ea953 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -78,7 +78,10 @@ function hookNextNodeServer() {
+         if (!isPageFound)
+             return false;
+         // Ensure that the page gets built, if it exists
+-        await this.ensureApiPage(page);
++        await this.ensureEdgeFunction({
++            page,
++            appPaths: null,
++        });
+         // Get the path of the built page. Will throw an error if the page doesn't
+         // exist. This is fine to ignore, as it just falls into one of the many
+         // other 404's that Next.js doesn't really do anything with
+diff --git a/dist/patch.js b/dist/patch.js
+index 5c92ad9de13d1b15a61b1a08d36ddae98c22ad53..955e1f1d65ab8dd015855f41e53c6d7be13cb697 100644
+--- a/dist/patch.js
++++ b/dist/patch.js
+@@ -34,7 +34,7 @@ const mod = template_1.default.expression.ast `require("next-plugin-websocket")`
+ async function main() {
+     await patchNextNodeServer();
+     await patchWebpackConfig();
+-    await patchStandaloneServer();
++    // await patchStandaloneServer();
+ }
+ main();
+ async function patchNextNodeServer() {
