@@ -26,7 +26,7 @@ function getEndingLink(ctx: NextPageContext | undefined) {
     }
 
     const client = createWSClient({
-        url: `${ location.protocol === 'https' ? 'wss' : 'ws' }://${ location.host }/api/trpc`
+        url: `${ location.protocol === 'https:' ? 'wss' : 'ws' }://${ location.host }/api/trpc`
     });
 
     return wsLink<AppRouter>({
