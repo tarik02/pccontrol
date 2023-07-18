@@ -40,6 +40,7 @@ const createSocket = () => {
         onClosing$: closingObserver,
         isOpen$: merge(
             openObserver.pipe(map(() => true)),
+            messages$.pipe(map(() => true)),
             closeObserver.pipe(map(() => false))
         ).pipe(distinctUntilChanged()).pipe(shareReplay(1)),
         close: () => {
